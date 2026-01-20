@@ -12,7 +12,7 @@ const features = [
 
 export function Features() {
     return (
-        <section className="py-20 bg-[#0a0a0f] border-y border-white/5">
+        <section className="py-16 md:py-20 bg-[#0a0a0f] border-y border-white/5">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                     {features.map((feat, i) => (

@@ -1,93 +1,93 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GlassCard } from "../ui/GlassCard";
+import { LuminousCard } from "../ui/LuminousCard";
 import { Users, CheckSquare, GraduationCap, Wallet, Phone, MessageCircle } from "lucide-react";
 
 const modules = [
     {
         title: "HRMS",
-        desc: "Complete employee lifecycle management.",
+        desc: "Unified employee lifecycle management.",
         icon: Users,
-        color: "from-blue-500 to-cyan-500"
+        span: "col-span-1 md:col-span-2 lg:col-span-2",
+        gradient: "from-blue-500/20 to-cyan-500/20"
     },
     {
         title: "Task Tracker",
-        desc: "Project planning & progress tracking.",
+        desc: "Agile project planning.",
         icon: CheckSquare,
-        color: "from-purple-500 to-pink-500"
+        span: "col-span-1",
+        gradient: "from-purple-500/20 to-pink-500/20"
     },
     {
         title: "LMS",
-        desc: "Training, onboarding & certification.",
+        desc: "Automated training & onboarding.",
         icon: GraduationCap,
-        color: "from-amber-400 to-orange-500"
+        span: "col-span-1",
+        gradient: "from-amber-400/20 to-orange-500/20"
     },
     {
         title: "Accounts",
-        desc: "Billing, expenses & salary processing.",
+        desc: "Seamless billing & expenses.",
         icon: Wallet,
-        color: "from-green-400 to-emerald-600"
+        span: "col-span-1 md:col-span-2 lg:col-span-2",
+        gradient: "from-green-400/20 to-emerald-600/20"
     },
     {
         title: "IVRS",
-        desc: "Smart call routing & lead handling.",
+        desc: "Smart routing.",
         icon: Phone,
-        color: "from-red-400 to-rose-600"
+        span: "col-span-1",
+        gradient: "from-red-400/20 to-rose-600/20"
     },
     {
         title: "WhatsApp",
-        desc: "Automated lead extraction & tracking.",
+        desc: "Direct integration.",
         icon: MessageCircle,
-        color: "from-lime-400 to-green-500"
+        span: "col-span-1",
+        gradient: "from-lime-400/20 to-green-500/20"
     },
 ];
 
 export function Modules() {
     return (
-        <section id="modules" className="py-20 relative bg-[#0a0a0f]">
+        <section id="modules" className="py-24 relative bg-[#030014]">
             <div className="max-w-7xl mx-auto px-6">
                 <motion.div
-                    className="text-center mb-16"
+                    className="text-center mb-20"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <span className="text-primary text-sm font-bold uppercase tracking-widest">Core Modules</span>
-                    <h2 className="text-4xl md:text-5xl font-bold mt-4 text-white">An Ecosystem of <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Intelligent Portals</span></h2>
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                        Integrated Modules
+                    </h2>
+                    <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                        Everything you need to run your real estate business, all in one place.
+                    </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[250px]">
                     {modules.map((mod, i) => (
                         <motion.div
                             key={mod.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            className={mod.span}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.1 }}
                             viewport={{ once: true }}
                         >
-                            <GlassCard
-                                className="h-full group hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden"
-                            >
-                                {/* Hover Glow Background */}
-                                <div className={`absolute inset-0 bg-gradient-to-br ${mod.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                            <LuminousCard className="h-full p-8 flex flex-col justify-between group">
+                                <div className={`absolute inset-0 bg-gradient-to-br ${mod.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
 
-                                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${mod.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                                    <mod.icon className="w-7 h-7 text-white" />
-                                </div>
-
-                                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">{mod.title}</h3>
-                                <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{mod.desc}</p>
-
-                                {/* Arrow hint */}
-                                <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-4 group-hover:translate-x-0">
-                                    <div className={`h-8 w-8 rounded-full bg-gradient-to-r ${mod.color} flex items-center justify-center`}>
-                                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
+                                <div className="relative z-10">
+                                    <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                        <mod.icon className="w-6 h-6 text-white" />
                                     </div>
+                                    <h3 className="text-2xl font-bold text-white mb-2">{mod.title}</h3>
+                                    <p className="text-gray-400">{mod.desc}</p>
                                 </div>
-                            </GlassCard>
+                            </LuminousCard>
                         </motion.div>
                     ))}
                 </div>

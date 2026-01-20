@@ -1,17 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronRight } from "lucide-react";
-import { NeonButton } from "../ui/NeonButton";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { MagneticButton } from "../ui/MagneticButton";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-    { name: "About", href: "#about" },
     { name: "Modules", href: "#modules" },
+    { name: "Live Dashboard", href: "#dashboard" },
+    { name: "AI Agent", href: "#ai" },
     { name: "Features", href: "#features" },
-    { name: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -19,90 +19,87 @@ export function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
+        const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     return (
-        <motion.nav
-            className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-                scrolled && "bg-[#0a0a0f]/80 backdrop-blur-md border-white/10"
-            )}
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.8 }}
-        >
-            <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+            <motion.nav
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                className={cn(
+                    "w-full max-w-5xl rounded-full border transition-all duration-300 backdrop-blur-md px-6 py-3 flex items-center justify-between",
+                    scrolled
+                        ? "bg-[#0a0a0f]/80 border-white/10 shadow-lg shadow-primary/5"
+                        : "bg-transparent border-transparent"
+                )}
+            >
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 group">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-black font-bold text-xl group-hover:shadow-[0_0_20px_var(--color-primary)] transition-all">
-                        S
-                    </div>
-                    <span className="text-2xl font-bold tracking-tighter text-white">
-                        Syndi<span className="text-primary">Tech</span>
-                    </span>
+                <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-white mr-8">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-sm">S</div>
+                    SyndiTech
                 </Link>
 
                 {/* Desktop Nav */}
-                <div className="hidden md:flex items-center gap-8">
+                <div className="hidden md:flex items-center gap-1">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="relative text-sm font-medium text-gray-300 hover:text-white transition-colors group"
+                            className="px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-full transition-colors"
                         >
                             {link.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
                         </Link>
                     ))}
-                    <NeonButton variant="outline" className="ml-4 h-10 px-6 text-sm">
-                        Login
-                    </NeonButton>
-                    <NeonButton className="h-10 px-6 text-sm">
-                        Get Demo
-                    </NeonButton>
+                </div>
+
+                {/* CTA */}
+                <div className="hidden md:block ml-auto">
+                    <MagneticButton className="px-6 py-2 h-auto text-xs bg-white text-black hover:bg-gray-200 border-none">
+                        Access Portal
+                    </MagneticButton>
                 </div>
 
                 {/* Mobile Toggle */}
                 <button
-                    className="md:hidden text-white"
+                    className="md:hidden text-white p-2"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 >
                     {mobileMenuOpen ? <X /> : <Menu />}
                 </button>
-            </div>
+            </motion.nav>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-[#0a0a0f] border-b border-white/10 overflow-hidden"
+                        initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                        className="absolute top-20 left-4 right-4 bg-[#0a0a0f] border border-white/10 rounded-3xl p-6 shadow-2xl overflow-hidden z-50 md:hidden"
                     >
-                        <div className="px-6 py-8 flex flex-col gap-6">
+                        <nav className="flex flex-col gap-4">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="text-lg font-medium text-gray-300 hover:text-primary flex items-center justify-between group"
+                                    className="text-lg font-medium text-gray-300 hover:text-white p-2"
                                 >
                                     {link.name}
-                                    <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                                 </Link>
                             ))}
-                            <div className="flex flex-col gap-4 mt-4">
-                                <NeonButton variant="outline" className="w-full justify-center">Login</NeonButton>
-                                <NeonButton className="w-full justify-center">Get Demo</NeonButton>
+                            <div className="mt-4 pt-4 border-t border-white/10">
+                                <MagneticButton className="w-full justify-center">
+                                    Access Portal
+                                </MagneticButton>
                             </div>
-                        </div>
+                        </nav>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.nav>
+        </header>
     );
 }

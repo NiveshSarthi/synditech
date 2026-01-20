@@ -38,9 +38,12 @@ export function DashboardPreview() {
                             whileInView={{ rotateY: 0, rotateX: 0 }}
                             transition={{ duration: 1, type: "spring" }}
                         >
-                            <GlassCard className="border-gray-700/50 bg-[#0f111a]/90 backdrop-blur-xl shadow-2xl overflow-hidden aspect-video relative">
+                            <GlassCard className="border-gray-700/50 bg-[#0f111a]/90 backdrop-blur-xl shadow-2xl overflow-hidden aspect-auto md:aspect-video relative min-h-[500px] md:min-h-0">
+                                {/* Scanline Effect */}
+                                <div className="absolute inset-0 z-50 pointer-events-none bg-gradient-to-b from-transparent via-primary/5 to-transparent animate-[scanline_6s_linear_infinite]" />
+
                                 {/* Top Bar */}
-                                <div className="h-12 border-b border-white/5 flex items-center px-6 justify-between">
+                                <div className="h-12 border-b border-white/5 flex items-center px-6 justify-between relative z-20">
                                     <div className="flex items-center gap-2">
                                         <div className="w-3 h-3 rounded-full bg-red-500/50" />
                                         <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
@@ -50,10 +53,10 @@ export function DashboardPreview() {
                                 </div>
 
                                 {/* Grid Content */}
-                                <div className="p-6 grid grid-cols-3 gap-6 h-[calc(100%-3rem)]">
+                                <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 h-auto md:h-[calc(100%-3rem)]">
 
                                     {/* Widget 1: Graph */}
-                                    <div className="col-span-2 bg-white/5 rounded-xl p-4 border border-white/5 relative overflow-hidden">
+                                    <div className="col-span-1 md:col-span-2 bg-white/5 rounded-xl p-4 border border-white/5 relative overflow-hidden">
                                         <h4 className="text-xs text-gray-500 uppercase mb-4">Revenue Growth</h4>
                                         <div className="flex items-end justify-between h-32 gap-2">
                                             {bars.map((_, i) => (
@@ -83,7 +86,7 @@ export function DashboardPreview() {
                                     </div>
 
                                     {/* Widget 3: Activity Feed */}
-                                    <div className="col-span-3 bg-white/5 rounded-xl p-4 border border-white/5">
+                                    <div className="col-span-1 md:col-span-3 bg-white/5 rounded-xl p-4 border border-white/5">
                                         <h4 className="text-xs text-gray-500 uppercase mb-4">Recent Activity</h4>
                                         <div className="space-y-3">
                                             {[1, 2, 3].map((j) => (

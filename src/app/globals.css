@@ -4,54 +4,67 @@
   --font-sans: var(--font-inter);
   --font-heading: var(--font-exo);
 
-  --color-background: #0a0a0f;
-  --color-foreground: #ededed;
-  
-  --color-primary: #00f3ff;
-  --color-primary-dark: #00c2cc;
-  --color-secondary: #bc13fe;
-  --color-secondary-dark: #8a0bba;
-  --color-glass: rgba(255, 255, 255, 0.03);
-  --color-glass-border: rgba(255, 255, 255, 0.08);
+  /* Luminous Aurora Palette */
+  --color-background: #030014;
+  /* Void Black */
+  --color-foreground: #ffffff;
 
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-  }
+  --color-primary: #a855f7;
+  /* Violet */
+  --color-secondary: #06b6d4;
+  /* Cyan */
+  --color-accent: #f472b6;
+  /* Pink */
 
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.6; box-shadow: 0 0 20px var(--color-primary); }
-    50% { opacity: 1; box-shadow: 0 0 40px var(--color-primary), 0 0 20px var(--color-secondary); }
+  --animate-aurora: aurora 20s linear infinite;
+
+  @keyframes aurora {
+    0% {
+      background-position: 50% 50%, 50% 50%;
+    }
+
+    100% {
+      background-position: 350% 50%, 350% 50%;
+    }
   }
 }
 
 :root {
-  --background: #0a0a0f;
-  --foreground: #ededed;
+  --background: #030014;
+  --foreground: #ffffff;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  /* Clean modern look */
+  letter-spacing: -0.02em;
+  /* Tighter tracking */
 }
 
-/* Glassmorphism Utilities */
+/* Utilities */
 .glass-panel {
-  background: var(--color-glass);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--color-glass-border);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(to right, #c084fc, #6366f1, #3b82f6);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

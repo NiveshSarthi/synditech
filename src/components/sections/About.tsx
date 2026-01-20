@@ -5,7 +5,7 @@ import { GlassCard } from "../ui/GlassCard";
 
 export function About() {
     return (
-        <section id="about" className="py-32 relative overflow-hidden bg-[#0a0a0f]">
+        <section id="about" className="py-16 md:py-32 relative overflow-hidden bg-[#0a0a0f]">
             {/* Background Elements */}
             <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full" />
             <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-secondary/5 blur-[120px] rounded-full" />
